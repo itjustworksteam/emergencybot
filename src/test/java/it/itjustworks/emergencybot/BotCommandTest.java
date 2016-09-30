@@ -78,7 +78,7 @@ public class BotCommandTest {
 	private String contributeResponse() {
 		String output = "";
 		output += "If you are a developer please follow this link: https://github.com/itjustworksteam/emergencybot/blob/master/README.md\n\n"
-				+ "if you have any suggestion please contact us using the /credits command.\nThanks so much for your help!\n";
+				+ "if you have any suggestion please use the /suggestion command.\nThanks so much for your help!\n";
 		return output;
 	}
 	
