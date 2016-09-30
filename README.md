@@ -1,5 +1,7 @@
 # Emergency Numbers Bot #
 
+[![Build Status](https://travis-ci.org/itjustworksteam/emergencybot.svg?branch=master)](https://travis-ci.org/itjustworksteam/emergencybot)
+
 ### A telegram bot that helps you getting emergency numbers ###
 
 * the official bot is [here](https://telegram.me/emergencynumbersbot)
