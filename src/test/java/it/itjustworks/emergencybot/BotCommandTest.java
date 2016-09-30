@@ -61,12 +61,26 @@ public class BotCommandTest {
 		assertEquals(suggestionResponse(), answer);
 	}
 	
+	@Test
+	public void testContributeCommand() {
+		Message message = createMessageWithText("/contribute");
+		String answer = new BotResponse.Builder().build().reply(message);
+		assertEquals(contributeResponse(), answer);
+	}
+	
 //	@Test
 //	public void testLocation() {
 //		Message message = createMessageWithLocation();
 //		String answer = new BotResponse.Builder().build().reply(message);
 //		assertNotEquals("", answer);
 //	}
+	
+	private String contributeResponse() {
+		String output = "";
+		output += "If you are a developer please follow this link: https://github.com/itjustworksteam/emergencybot/blob/master/README.md\n\n"
+				+ "if you have any suggestion please contact us using the /credits command.\nThanks so much for your help!\n";
+		return output;
+	}
 	
 	private String suggestionResponse() {
 		String output = "";
@@ -106,7 +120,8 @@ public class BotCommandTest {
 				+ "/help - show this message.\n"
 				+ "/credits - find out who is the developer.\n"
 				+ "/rate - rate this bot if you like it.\n"
-				+ "/suggestion - suggest something that you want to be implemented.\n";
+				+ "/suggestion - suggest something that you want to be implemented.\n"
+				+ "/contribute - see what you can do to improve the bot quality.\n";
 		return output;
 	}
 	
