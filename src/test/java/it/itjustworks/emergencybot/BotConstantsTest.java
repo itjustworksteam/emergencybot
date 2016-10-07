@@ -46,4 +46,9 @@ public class BotConstantsTest {
 				+ " please see /credits and inform the developer about it. Thanks", BotConstants.GETTING_EMERGENCY_ERROR);
 	}
 	
+	@Test
+	public void testMaintainance() {
+		assertNotNull(BotConstants.UPGRADE);
+	}
+	
 }

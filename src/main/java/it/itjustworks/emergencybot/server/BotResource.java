@@ -43,7 +43,14 @@ public class BotResource extends ServerResource {
 		Message message = update.message();
 		Chat chat = update.message().chat();
 		
-		String answer = new BotResponse.Builder().build().reply(message);
+		String answer = "";
+		if(BotConstants.UPGRADE) {
+			answer = "Stiamo facendo manutenzione.\nRiprova più tardi!\n"
+					+ "Per controllare lo stato dei nostri servizi clicca sul link: \n"
+					+ "www.itjustworks.it/status/";
+		} else {
+			answer = new BotResponse.Builder().build().reply(message);
+		}
 				
 		final TelegramBot bot = TelegramBotAdapter.build(Config.INSTANCE.BOT_TOKEN);
 		final SendResponse response = bot.execute(new SendMessage(chat.id(), answer));
@@ -54,6 +61,10 @@ public class BotResource extends ServerResource {
 	
 	@Get
 	public String ciao() {
+		if(BotConstants.UPGRADE) {
+			setStatus(Status.SERVER_ERROR_NOT_IMPLEMENTED);
+			return null;
+		}
 		getLogger().warning(BotConstants.GET_RESPONSE_ERROR);
 		setStatus(Status.CLIENT_ERROR_BAD_REQUEST, BotConstants.GET_RESPONSE_ERROR);
 		return null;
