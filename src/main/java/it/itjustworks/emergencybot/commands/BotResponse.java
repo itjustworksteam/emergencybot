@@ -19,8 +19,8 @@ private HashMap<String, Command> commands = new HashMap<String, Command>();
 			commands.put("/help", new HelpCommand());
 			commands.put("/credits", new CreditsCommand());
 			commands.put("/rate", new RateCommand());
-			commands.put("/suggestion", new SuggestionCommand());
 			commands.put("/contribute", new ContributeCommand());
+			commands.put("/feedback", new FeedbackCommand());
 		}
 		
 		public BotResponse build(){

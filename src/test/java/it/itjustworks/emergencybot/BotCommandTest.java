@@ -53,14 +53,7 @@ public class BotCommandTest {
 		String answer = new BotResponse.Builder().build().reply(message);
 		assertEquals(rateResponse(), answer);
 	}
-	
-	@Test
-	public void testSuggestionCommand() {
-		Message message = createMessageWithText("/suggestion");
-		String answer = new BotResponse.Builder().build().reply(message);
-		assertEquals(suggestionResponse(), answer);
-	}
-	
+		
 	@Test
 	public void testContributeCommand() {
 		Message message = createMessageWithText("/contribute");
@@ -68,28 +61,27 @@ public class BotCommandTest {
 		assertEquals(contributeResponse(), answer);
 	}
 	
-//	@Test
-//	public void testLocation() {
-//		Message message = createMessageWithLocation();
-//		String answer = new BotResponse.Builder().build().reply(message);
-//		assertNotEquals("", answer);
-//	}
+	@Test
+	public void testFeedbackCommand() {
+		Message message = createMessageWithText("/feedback");
+		String answer = new BotResponse.Builder().build().reply(message);
+		assertEquals(feedbackResponse(), answer);
+	}
 	
+	private String feedbackResponse() {
+		String output = "";
+		output += "If you have a question or you need an help. Please use our support bot: @itjustworksbot.\n"
+				+ "We will reply you as soon as possible!";
+		return output;
+	}
+		
 	private String contributeResponse() {
 		String output = "";
 		output += "If you are a developer please follow this link: https://github.com/itjustworksteam/emergencybot/blob/master/README.md\n\n"
-				+ "if you have any suggestion please use the /suggestion command.\nThanks so much for your help!\n";
+				+ "if you have any suggestion please use the /feedback command.\nThanks so much for your help!\n";
 		return output;
 	}
-	
-	private String suggestionResponse() {
-		String output = "";
-		output += "If you have any suggestion or see a message error. Please contact me as soon as possible.\n"
-				+ "Send me an email to: therickys93@gmail.com.\n"
-				+ "Thanks so much for your help.";
-		return output;
-	}
-	
+		
 	private String rateResponse() {
 		String output = "";
 		output += "If you like this bot please give it 5 stars.\n"
@@ -120,8 +112,8 @@ public class BotCommandTest {
 				+ "/help - show this message.\n"
 				+ "/credits - find out who is the developer.\n"
 				+ "/rate - rate this bot if you like it.\n"
-				+ "/suggestion - suggest something that you want to be implemented.\n"
-				+ "/contribute - see what you can do to improve the bot quality.\n";
+				+ "/contribute - see what you can do to improve the bot quality.\n"
+				+ "/feedback - say us what you think.\n";
 		return output;
 	}
 	
@@ -136,12 +128,7 @@ public class BotCommandTest {
 		Message message = createUpdateWithResponse(createTelegramResponseWithMessage(text)).message();
 		return message;
 	}
-	
-//	private Message createMessageWithLocation() {
-//		Message message = createUpdateWithResponse(telegramLocationResponse()).message();
-//		return message;
-//	}
-	
+		
 	private Update createUpdateWithResponse(String response){
 		Update update = BotUtils.parseUpdate(response);
 		if (update.updateId() != null) {
@@ -150,17 +137,7 @@ public class BotCommandTest {
 			return null;
 		}
 	}
-	
-//	private String telegramLocationResponse() {
-//		String output = "";
-//		output += "{\"update_id\":273881691,\"message\":{\"message_id\":2,"
-//				+ "\"from\":{\"id\":33409686,\"first_name\":\"Riccardo\",\"last_name\":\"Crippa\","
-//				+ "\"username\":\"therickys93\"},\"chat\":{\"id\":33409686,\"first_name\":\"Riccardo\","
-//				+ "\"last_name\":\"Crippa\",\"username\":\"therickys93\",\"type\":\"private\"},"
-//				+ "\"date\":1473255603,\"location\":{\"latitude\":45.650327,\"longitude\":9.197960}}}";
-//		return output;
-//	}
-		
+			
 	private String createTelegramResponseWithMessage(String message) {
 		String output = "";
 		output += "{\"update_id\":567305119,\"message\":{\"message_id\":599,"

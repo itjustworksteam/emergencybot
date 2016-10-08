@@ -13,8 +13,8 @@ public class HelpCommand implements Command {
 				+ "/help - show this message.\n"
 				+ "/credits - find out who is the developer.\n"
 				+ "/rate - rate this bot if you like it.\n"
-				+ "/suggestion - suggest something that you want to be implemented.\n"
-				+ "/contribute - see what you can do to improve the bot quality.\n";
+				+ "/contribute - see what you can do to improve the bot quality.\n"
+				+ "/feedback - say us what you think.\n";
 		return output;
 	}
 

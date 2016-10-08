@@ -41,5 +41,5 @@
 * /help --> show a little guide on how to use it
 * /credits --> find out who is the developer
 * /rate --> rate this bot
-* /suggestion --> tell me what you think about the bot
+* /feedback --> say us what you think about the bot
 * send your location --> show the police, medical and fire numbers of the country you are
