@@ -45,9 +45,7 @@ public class BotResource extends ServerResource {
 		
 		String answer = "";
 		if(BotConstants.UPGRADE) {
-			answer = "Stiamo facendo manutenzione.\nRiprova più tardi!\n"
-					+ "Per controllare lo stato dei nostri servizi clicca sul link: \n"
-					+ "www.itjustworks.it/status/";
+			answer = BotConstants.MAINTAINANCE_MESSAGE;
 		} else {
 			answer = new BotResponse.Builder().build().reply(message);
 		}

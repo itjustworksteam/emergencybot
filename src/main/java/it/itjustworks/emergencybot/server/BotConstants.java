@@ -10,5 +10,6 @@ public class BotConstants {
 	public static final String GETTING_EMERGENCY_ERROR = "Error 3: Getting Emergency Error.\n"+BotConstants.ACTION_ERROR;
 	public static final String ACTION_ERROR = "If you see this message please see /credits and inform the developer about it. Thanks";
 	public static final boolean UPGRADE = false;
+	public static final String MAINTAINANCE_MESSAGE = "The bot is in maintainance!\nPlease retry later.\nWe apologize for the inconvenience.\n";
 	
 }

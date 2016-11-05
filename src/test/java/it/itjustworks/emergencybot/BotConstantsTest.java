@@ -51,4 +51,9 @@ public class BotConstantsTest {
 		assertNotNull(BotConstants.UPGRADE);
 	}
 	
+	@Test
+	public void testMaintainanceResponse() {
+		assertEquals("The bot is in maintainance!\nPlease retry later.\nWe apologize for the inconvenience.\n", BotConstants.MAINTAINANCE_MESSAGE);
+	}
+	
 }
