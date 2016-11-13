@@ -35,7 +35,7 @@ public class BotCommandTest {
 	
 	@Test
 	public void testInvalidCommand() {
-		Message message = createMessageWithText("hello");
+		Message message = createMessageWithText("/hello");
 		String answer = new BotResponse.Builder().build().reply(message);
 		assertEquals(invalidCommandResponse(), answer);
 	}
