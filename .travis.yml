@@ -1,4 +1,9 @@
 language: java
 jdk: oraclejdk8
 script:
- - ./gradlew clean check stage
+- ./gradlew clean check stage
+deploy:
+  provider: heroku
+  app: emergencynumbersbot
+  api_key:
+    secure: L6h7bDSXl7y6qaQlnnFXS738vrHjQBWgf0+cIA77fV73uGeFfJC7thjKWibNuihZtd/XZvbXxDteWmssYnPvOpasywEeC2A8wQK/O9MARrl6Sr8OH/ZCaouV3ECtT/vn5OM7dJbilWqEo+PdBnyesuQbblfK1zlB2Jlk5vbWK3JjYZVEXE9cNCLCVl/Eo/m/rej6BCz1g3x+CMYe9OtJ5w0BLuJHyx2du9fNXRxtugXW6WUsQ4txgYOdfIzKPVFAeIv6k5YqEfTlYjpbg1xwD+alvi1xbwoqOPD4ScYa29XttwY84K9CIYIsJkTPTr9YMyFJT7p7MHdcjMTQJqOTBWmYc3DMgb4bi9TzHXHtK+Ymh6n1RA/Bne/sZHTVBINMvxm9QHJHDKXbFB3McNhiHGSS6ZKm0QO+211BRav7IEAIYueOi4W28R6jW0qeKPMAFxDxadb8pN2EW95rweDabMCg4HUh1zHWdhNuG/N76aBg8/xaKv7oduRCzfSTgTPtyZ/nuE5HcIBcaEU7IKADEjUXKAHzzvH6pPUFbHjb+vIrlheWR7BmXRJ5EFH0Pnxi6xePlPFxjl9bttFDWMxMO/6alWv2Cg238BH/rRkWpQAfteibI8bBr1azDPr8cMrW4lD7F1kuPUH3Wf7YrPZ19ms+oQUVX+K8CNHHRKPNyk0=
