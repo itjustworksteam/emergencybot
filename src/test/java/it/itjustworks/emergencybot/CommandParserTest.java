@@ -47,5 +47,12 @@ public class CommandParserTest {
         assertEquals("/comando", c.getCommand());
         assertEquals("lungo lungo lungo", c.getArgument());
     }
+    
+    @Test
+    public void testSix(){
+    	CommandParser c = new CommandParser("/contact_115");
+    	assertEquals("/contact", c.getCommand());
+    	assertEquals("115", c.getArgument());
+    }
 	
 }

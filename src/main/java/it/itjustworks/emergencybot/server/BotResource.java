@@ -14,6 +14,7 @@ import com.pengrad.telegrambot.TelegramBotAdapter;
 import com.pengrad.telegrambot.model.Chat;
 import com.pengrad.telegrambot.model.Message;
 import com.pengrad.telegrambot.model.Update;
+import com.pengrad.telegrambot.request.SendContact;
 import com.pengrad.telegrambot.request.SendMessage;
 import com.pengrad.telegrambot.response.SendResponse;
 
@@ -51,10 +52,29 @@ public class BotResource extends ServerResource {
 		}
 				
 		final TelegramBot bot = TelegramBotAdapter.build(Config.INSTANCE.BOT_TOKEN);
-		final SendResponse response = bot.execute(new SendMessage(chat.id(), answer));
+		final SendResponse response;
+		if(BotResource.isInteger(answer)) {
+			// send contact
+			 response = bot.execute(new SendContact(chat.id(), answer, "contact"));
+		} else {
+			// send message
+			response = bot.execute(new SendMessage(chat.id(), answer));
+		}
 		getLogger().info(response.toString());
 		
 		return null;
+	}
+	
+	private static boolean isInteger(String s) {
+	    try { 
+	        Integer.parseInt(s); 
+	    } catch(NumberFormatException e) { 
+	        return false; 
+	    } catch(NullPointerException e) {
+	        return false;
+	    }
+	    // only got here if we didn't return false
+	    return true;
 	}
 	
 	@Get
