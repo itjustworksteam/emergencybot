@@ -19,6 +19,7 @@ import com.pengrad.telegrambot.request.SendMessage;
 import com.pengrad.telegrambot.response.SendResponse;
 
 import it.itjustworks.emergencybot.commands.BotResponse;
+import it.itjustworks.emergencybot.utilities.Utils;
 
 public class BotResource extends ServerResource {
 	
@@ -53,7 +54,7 @@ public class BotResource extends ServerResource {
 				
 		final TelegramBot bot = TelegramBotAdapter.build(Config.INSTANCE.BOT_TOKEN);
 		final SendResponse response;
-		if(BotResource.isInteger(answer)) {
+		if(Utils.isInteger(answer)) {
 			// send contact
 			 response = bot.execute(new SendContact(chat.id(), answer, "contact"));
 		} else {
@@ -64,19 +65,7 @@ public class BotResource extends ServerResource {
 		
 		return null;
 	}
-	
-	private static boolean isInteger(String s) {
-	    try { 
-	        Integer.parseInt(s); 
-	    } catch(NumberFormatException e) { 
-	        return false; 
-	    } catch(NullPointerException e) {
-	        return false;
-	    }
-	    // only got here if we didn't return false
-	    return true;
-	}
-	
+		
 	@Get
 	public String ciao() {
 		if(BotConstants.UPGRADE) {
