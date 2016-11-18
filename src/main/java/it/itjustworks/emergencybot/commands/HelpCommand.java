@@ -12,7 +12,6 @@ public class HelpCommand implements Command {
 				+ "/start - start the chat.\n"
 				+ "/help - show this message.\n"
 				+ "/credits - find out who is the developer.\n"
-				+ "/rate - rate this bot if you like it.\n"
 				+ "/contribute - see what you can do to improve the bot quality.\n"
 				+ "/feedback - say us what you think.\n";
 		return output;

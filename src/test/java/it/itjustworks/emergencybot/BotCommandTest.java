@@ -51,7 +51,7 @@ public class BotCommandTest {
 	public void testRateCommand() {
 		Message message = createMessageWithText("/rate");
 		String answer = new BotResponse.Builder().build().reply(message);
-		assertEquals(rateResponse(), answer);
+		assertEquals(invalidCommandResponse(), answer);
 	}
 		
 	@Test
@@ -92,7 +92,7 @@ public class BotCommandTest {
 	
 	private String creditsCommandResponse() {
 		String output = "";
-		output += "Developed by therickys93, co-founder of 'It Just Works'. More info at www.itjustworks.it.";
+		output += "Developed by @therickys93, co-founder of 'It Just Works'. More info at www.itjustworks.it.";
 		return output;
 	}
 	
@@ -111,7 +111,6 @@ public class BotCommandTest {
 				+ "/start - start the chat.\n"
 				+ "/help - show this message.\n"
 				+ "/credits - find out who is the developer.\n"
-				+ "/rate - rate this bot if you like it.\n"
 				+ "/contribute - see what you can do to improve the bot quality.\n"
 				+ "/feedback - say us what you think.\n";
 		return output;
