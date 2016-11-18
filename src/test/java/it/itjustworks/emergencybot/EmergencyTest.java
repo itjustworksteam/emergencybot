@@ -35,10 +35,10 @@ public class EmergencyTest {
 	
 	private String beautifulToString() {
 		String output = "";
-		output += "You are in Italy.\n"
-				+ "Fire: 115.\n"
-				+ "Police: 113.\n"
-				+ "Medical: 118.\n";
+		output += "You are in Italy.\n\n"
+				+ "Fire: /contact_115.\n\n"
+				+ "Police: /contact_113.\n\n"
+				+ "Medical: /contact_118.\n";
 		return output;
 	}
 	

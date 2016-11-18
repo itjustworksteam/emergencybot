@@ -72,15 +72,15 @@ public class Emergency {
 		String output = "";
 		output += "You are in "
 				+ this.country
-				+ ".\n"
+				+ ".\n\n"
 				+ "Fire: "
-				+ this.fire
-				+ ".\n"
+				+ "/contact_" + this.fire
+				+ ".\n\n"
 				+ "Police: "
-				+ this.police
-				+ ".\n"
+				+ "/contact_" + this.police
+				+ ".\n\n"
 				+ "Medical: "
-				+ this.medical
+				+ "/contact_" + this.medical
 				+ ".\n";
 		return output;
 	}

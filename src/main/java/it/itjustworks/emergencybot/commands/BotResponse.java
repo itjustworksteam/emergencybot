@@ -20,6 +20,7 @@ private HashMap<String, Command> commands = new HashMap<String, Command>();
 			commands.put("/credits", new CreditsCommand());
 			commands.put("/contribute", new ContributeCommand());
 			commands.put("/feedback", new FeedbackCommand());
+			commands.put("/contact", new ContactCommand());
 		}
 		
 		public BotResponse build(){
