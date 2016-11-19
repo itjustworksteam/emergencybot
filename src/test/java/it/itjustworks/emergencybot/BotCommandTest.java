@@ -68,6 +68,13 @@ public class BotCommandTest {
 		assertEquals(feedbackResponse(), answer);
 	}
 	
+	@Test
+	public void testContactCommand() {
+		Message message = createMessageWithText("/contact_115");
+		String answer = new BotResponse.Builder().build().reply(message);
+		assertEquals("115", answer);
+	}
+	
 	private String feedbackResponse() {
 		String output = "";
 		output += "If you have a question or you need an help. Please use our support bot: @itjustworksbot.\n"
@@ -79,14 +86,6 @@ public class BotCommandTest {
 		String output = "";
 		output += "If you are a developer please follow this link: https://github.com/itjustworksteam/emergencybot/blob/master/README.md\n\n"
 				+ "if you have any suggestion please use the /feedback command.\nThanks so much for your help!\n";
-		return output;
-	}
-		
-	private String rateResponse() {
-		String output = "";
-		output += "If you like this bot please give it 5 stars.\n"
-				+ "Follow this link: https://telegram.me/storebot?start=emergencynumbersbot\n"
-				+ "Thank a lot!";
 		return output;
 	}
 	
