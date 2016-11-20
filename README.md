@@ -42,3 +42,22 @@
 * /credits --> find out who is the developer
 * /feedback --> say us what you think about the bot
 * send your location --> show the police, medical and fire numbers of the country you are
+
+### use docker compose and run it locally ###
+
+```
+version: '2'
+
+services:
+  app:
+    image: therickys93/emergencybot
+    environment:
+      - TELEGRAM_BOT_TOKEN=your_token
+      - TELEGRAM_SERVER_TOKEN=123
+      - PORT=80
+  proxy:
+    image: therickys93/proxy
+    ports:
+      - "80:80"
+
+```

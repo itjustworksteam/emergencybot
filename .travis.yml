@@ -1,7 +1,16 @@
 language: java
 jdk: oraclejdk8
+sudo: required
+services:
+  - docker
 script:
-- ./gradlew clean check stage
+  - ./gradlew clean check stage
+after_success:
+  - docker build -t therickys93/emergencybot .
+  - if [ "$TRAVIS_BRANCH" == "master" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
+    docker login -e="$DOCKER_EMAIL" -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
+    docker push therickys93/emergencybot;
+    fi
 deploy:
   provider: heroku
   app: emergencynumbersbot
