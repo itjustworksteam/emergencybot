@@ -75,6 +75,20 @@ public class BotCommandTest {
 		assertEquals("115", answer);
 	}
 	
+	@Test
+	public void testHelpButtonPressed() {
+		Message message = createMessageWithText("HELP");
+		String answer = new BotResponse.Builder().build().reply(message);
+		assertEquals(helpResponse(), answer);
+	}
+	
+	@Test
+	public void testFeedbackButtonPressed() {
+		Message message = createMessageWithText("FEEDBACK");
+		String answer = new BotResponse.Builder().build().reply(message);
+		assertEquals(feedbackResponse(), answer);
+	}
+	
 	private String feedbackResponse() {
 		String output = "";
 		output += "If you have a question or you need an help. Please use our support bot: @itjustworksbot.\n"
@@ -138,11 +152,20 @@ public class BotCommandTest {
 			
 	private String createTelegramResponseWithMessage(String message) {
 		String output = "";
-		output += "{\"update_id\":567305119,\"message\":{\"message_id\":599,"
-				+ "\"from\":{\"id\":12345678,\"first_name\":\"Riccardo\",\"last_name\":\"Crippa\","
-				+ "\"username\":\"therickys93\"},\"chat\":{\"id\":12345678,"
-				+ "\"first_name\":\"Riccardo\",\"last_name\":\"Crippa\",\"username\":\"therickys93\"},"
-				+ "\"date\":1439275732,\"text\":\"\\" + message + "\"}}";
+		if(message.contains("/")) {
+			output += "{\"update_id\":567305119,\"message\":{\"message_id\":599,"
+					+ "\"from\":{\"id\":12345678,\"first_name\":\"Riccardo\",\"last_name\":\"Crippa\","
+					+ "\"username\":\"therickys93\"},\"chat\":{\"id\":12345678,"
+					+ "\"first_name\":\"Riccardo\",\"last_name\":\"Crippa\",\"username\":\"therickys93\"},"
+					+ "\"date\":1439275732,\"text\":\"\\" + message + "\"}}";
+		} else {
+			output += "{\"update_id\":567305119,\"message\":{\"message_id\":599,"
+					+ "\"from\":{\"id\":12345678,\"first_name\":\"Riccardo\",\"last_name\":\"Crippa\","
+					+ "\"username\":\"therickys93\"},\"chat\":{\"id\":12345678,"
+					+ "\"first_name\":\"Riccardo\",\"last_name\":\"Crippa\",\"username\":\"therickys93\"},"
+					+ "\"date\":1439275732,\"text\":\"" + message + "\"}}";
+
+		}
 		return output;
 	}
 }

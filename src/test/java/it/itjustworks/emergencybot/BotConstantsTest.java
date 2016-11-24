@@ -56,4 +56,18 @@ public class BotConstantsTest {
 		assertEquals("The bot is in maintainance!\nPlease retry later.\nWe apologize for the inconvenience.\n", BotConstants.MAINTAINANCE_MESSAGE);
 	}
 	
+	@Test
+	public void testSendYourLocationButtonText() {
+		assertEquals("SEND YOUR LOCATION", BotConstants.LOCATION_BUTTON);
+	}
+	
+	@Test
+	public void testHelpButtonText() {
+		assertEquals("HELP", BotConstants.HELP_BUTTON);
+	}
+	
+	@Test
+	public void testFeedbackButtonText() {
+		assertEquals("FEEDBACK", BotConstants.FEEDBACK_BUTTON);
+	}
 }

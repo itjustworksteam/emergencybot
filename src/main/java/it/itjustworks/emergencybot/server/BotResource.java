@@ -14,6 +14,9 @@ import com.pengrad.telegrambot.TelegramBotAdapter;
 import com.pengrad.telegrambot.model.Chat;
 import com.pengrad.telegrambot.model.Message;
 import com.pengrad.telegrambot.model.Update;
+import com.pengrad.telegrambot.model.request.Keyboard;
+import com.pengrad.telegrambot.model.request.KeyboardButton;
+import com.pengrad.telegrambot.model.request.ReplyKeyboardMarkup;
 import com.pengrad.telegrambot.request.SendContact;
 import com.pengrad.telegrambot.request.SendMessage;
 import com.pengrad.telegrambot.response.SendResponse;
@@ -54,12 +57,21 @@ public class BotResource extends ServerResource {
 				
 		final TelegramBot bot = TelegramBotAdapter.build(Config.INSTANCE.BOT_TOKEN);
 		final SendResponse response;
+		final Keyboard keyboard = new ReplyKeyboardMarkup(
+		        new KeyboardButton[]{
+		                new KeyboardButton(BotConstants.LOCATION_BUTTON).requestLocation(true)
+		        },
+		        new KeyboardButton[] {
+		                new KeyboardButton(BotConstants.HELP_BUTTON),
+		                new KeyboardButton(BotConstants.FEEDBACK_BUTTON)
+		        }
+		).oneTimeKeyboard(false); 
 		if(Utils.isInteger(answer)) {
 			// send contact
-			 response = bot.execute(new SendContact(chat.id(), answer, "contact"));
+			 response = bot.execute(new SendContact(chat.id(), answer, "contact").replyMarkup(keyboard));
 		} else {
 			// send message
-			response = bot.execute(new SendMessage(chat.id(), answer));
+			response = bot.execute(new SendMessage(chat.id(), answer).replyMarkup(keyboard));
 		}
 		getLogger().info(response.toString());
 		
