@@ -85,4 +85,15 @@ public class Emergency {
 		return output;
 	}
 
+
+	public String toJSON() {
+		String output = "";
+		output += "{\"message\": "
+				+ "\"You are in " + this.country +"\", "
+				+ "\"police\":\"/contact_"+this.police+"\", "
+				+ "\"fire\":\"/contact_"+this.fire+"\", "
+				+ "\"medical\":\"/contact_"+this.medical+"\"}";
+		return output;
+	}
+
 }

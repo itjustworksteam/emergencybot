@@ -14,13 +14,19 @@ import com.pengrad.telegrambot.TelegramBotAdapter;
 import com.pengrad.telegrambot.model.Chat;
 import com.pengrad.telegrambot.model.Message;
 import com.pengrad.telegrambot.model.Update;
+import com.pengrad.telegrambot.model.request.InlineKeyboardButton;
+import com.pengrad.telegrambot.model.request.InlineKeyboardMarkup;
 import com.pengrad.telegrambot.model.request.Keyboard;
 import com.pengrad.telegrambot.model.request.KeyboardButton;
 import com.pengrad.telegrambot.model.request.ReplyKeyboardMarkup;
+import com.pengrad.telegrambot.request.AnswerCallbackQuery;
 import com.pengrad.telegrambot.request.SendContact;
 import com.pengrad.telegrambot.request.SendMessage;
 import com.pengrad.telegrambot.response.SendResponse;
 
+import it.itjustworks.emergencybot.JSONArray;
+import it.itjustworks.emergencybot.JSONObject;
+import it.itjustworks.emergencybot.JSONParser;
 import it.itjustworks.emergencybot.commands.BotResponse;
 import it.itjustworks.emergencybot.utilities.Utils;
 
@@ -43,11 +49,18 @@ public class BotResource extends ServerResource {
 			return null;
 		}
 		
+		final TelegramBot bot = TelegramBotAdapter.build(Config.INSTANCE.BOT_TOKEN);
 		getLogger().info(update.toString());
-		
-		Message message = update.message();
-		Chat chat = update.message().chat();
-		
+		Message message;
+		Chat chat;
+		if(update.message() != null){
+			message = update.message();
+			chat = update.message().chat();
+		} else {
+			bot.execute(new AnswerCallbackQuery(update.callbackQuery().id()));
+			message = Utils.createMessageWithText(update.callbackQuery().data());
+			chat = update.callbackQuery().message().chat();
+		}
 		String answer = "";
 		if(BotConstants.UPGRADE) {
 			answer = BotConstants.MAINTAINANCE_MESSAGE;
@@ -55,7 +68,6 @@ public class BotResource extends ServerResource {
 			answer = new BotResponse.Builder().build().reply(message);
 		}
 				
-		final TelegramBot bot = TelegramBotAdapter.build(Config.INSTANCE.BOT_TOKEN);
 		final SendResponse response;
 		final Keyboard keyboard = new ReplyKeyboardMarkup(
 		        new KeyboardButton[]{
@@ -65,10 +77,43 @@ public class BotResource extends ServerResource {
 		                new KeyboardButton(BotConstants.HELP_BUTTON),
 		                new KeyboardButton(BotConstants.FEEDBACK_BUTTON)
 		        }
-		).oneTimeKeyboard(false); 
+		).oneTimeKeyboard(false);
 		if(Utils.isInteger(answer)) {
 			// send contact
-			 response = bot.execute(new SendContact(chat.id(), answer, "contact").replyMarkup(keyboard));
+			response = bot.execute(new SendContact(chat.id(), answer, "contact").replyMarkup(keyboard));
+		} else if(Utils.isJSONValid(answer)) {
+			// send inline keyboard
+			JSONParser parser = new JSONParser();
+			String output;
+			String fire = "";
+			String police = "";
+			String medical = "";
+			try {
+				Object o = parser.parse(answer);
+				JSONObject jsonResponse = (JSONObject)o;
+				output = (String)jsonResponse.get("message");
+				fire = (String)jsonResponse.get("fire");
+				police = (String)jsonResponse.get("police");
+				medical = (String)jsonResponse.get("medical");
+			} catch (Exception e){
+				output = null;
+			}
+			if(message == null) {
+				response = bot.execute(new SendMessage(chat.id(), "Something unexpected happens"));
+			} else {
+				InlineKeyboardMarkup inlineKeyboard = new InlineKeyboardMarkup(
+				        new InlineKeyboardButton[]{
+				                new InlineKeyboardButton("Contact Police").callbackData(police),
+				        },
+				        new InlineKeyboardButton[]{
+				                new InlineKeyboardButton("Contact Fire").callbackData(fire),
+				        },
+				        new InlineKeyboardButton[]{
+				                new InlineKeyboardButton("Contact Medical").callbackData(medical)
+				        }
+				        );
+				response = bot.execute(new SendMessage(chat.id(), output).replyMarkup(inlineKeyboard));
+			}
 		} else {
 			// send message
 			response = bot.execute(new SendMessage(chat.id(), answer).replyMarkup(keyboard));

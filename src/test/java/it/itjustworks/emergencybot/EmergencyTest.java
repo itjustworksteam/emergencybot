@@ -33,6 +33,19 @@ public class EmergencyTest {
 		assertEquals(beautifulToString(), emergency.prettyToString());
 	}
 	
+	@Test
+	public void testToJSON() {
+		Emergency emergency = new Emergency(emergencyResponse());
+		assertEquals(emergencyToJSONResponse(), emergency.toJSON());
+	}
+	
+	private String emergencyToJSONResponse() {
+		String output = "";
+		output += "{\"message\": \"You are in Italy\", "
+				+ "\"police\":\"/contact_113\", \"fire\":\"/contact_115\", \"medical\":\"/contact_118\"}";
+		return output;
+	}
+	
 	private String beautifulToString() {
 		String output = "";
 		output += "You are in Italy.\n\n"

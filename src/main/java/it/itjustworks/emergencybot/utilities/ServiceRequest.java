@@ -21,7 +21,7 @@ public class ServiceRequest {
 		if(emergency == null) {
 			return BotConstants.GETTING_EMERGENCY_ERROR;
 		}
-		return emergency.prettyToString();
+		return emergency.toJSON();
 	}
 	
 	private Country getCountry(String url) throws Exception {

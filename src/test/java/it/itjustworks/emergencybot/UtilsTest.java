@@ -14,4 +14,17 @@ public class UtilsTest {
 		assertFalse(Utils.isInteger("hello"));
 	}
 	
+	@Test
+	public void testJSONValid() {
+		assertFalse(Utils.isJSONValid("hello"));
+		assertFalse(Utils.isJSONValid("115"));
+		String validJsonString = "{ \"developers\": [{ \"firstName\":\"Linus\" , \"lastName\":\"Torvalds\" }, " +
+		        "{ \"firstName\":\"John\" , \"lastName\":\"von Neumann\" } ]}";
+		String invalidJsonString = "\"developers\": [ \"firstName\":\"Linus\" , \"lastName\":\"Torvalds\" }, " +
+		        "{ \"firstName\":\"John\" , \"lastName\":\"von Neumann\" } ]}";
+		assertTrue(Utils.isJSONValid(validJsonString));
+		assertFalse(Utils.isJSONValid(invalidJsonString));
+
+	}
+	
 }
