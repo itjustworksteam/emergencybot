@@ -14,6 +14,7 @@ import com.pengrad.telegrambot.TelegramBotAdapter;
 import com.pengrad.telegrambot.model.Chat;
 import com.pengrad.telegrambot.model.Message;
 import com.pengrad.telegrambot.model.Update;
+import com.pengrad.telegrambot.model.request.ChatAction;
 import com.pengrad.telegrambot.model.request.InlineKeyboardButton;
 import com.pengrad.telegrambot.model.request.InlineKeyboardMarkup;
 import com.pengrad.telegrambot.model.request.Keyboard;
@@ -61,6 +62,7 @@ public class BotResource extends ServerResource {
 			message = Utils.createMessageWithText(update.callbackQuery().data());
 			chat = update.callbackQuery().message().chat();
 		}
+		bot.execute(new SendChatAction(chat.id(), ChatAction.typing.toString()));
 		String answer = "";
 		if(BotConstants.UPGRADE) {
 			answer = BotConstants.MAINTAINANCE_MESSAGE;
