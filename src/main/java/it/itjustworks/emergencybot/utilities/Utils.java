@@ -4,8 +4,6 @@ import com.pengrad.telegrambot.BotUtils;
 import com.pengrad.telegrambot.model.Message;
 import com.pengrad.telegrambot.model.Update;
 
-import it.itjustworks.emergencybot.JSONParser;
-
 public class Utils {
 
 	public static boolean isInteger(String string) {
@@ -44,16 +42,16 @@ public class Utils {
 	private static String createTelegramResponseWithMessage(String message) {
 		String output = "";
 		if(message.contains("/")) {
-			output += "{\"update_id\":567305119,\"message\":{\"message_id\":599,"
-					+ "\"from\":{\"id\":12345678,\"first_name\":\"Riccardo\",\"last_name\":\"Crippa\","
-					+ "\"username\":\"therickys93\"},\"chat\":{\"id\":12345678,"
-					+ "\"first_name\":\"Riccardo\",\"last_name\":\"Crippa\",\"username\":\"therickys93\"},"
+			output += "{\"update_id\":123456789,\"message\":{\"message_id\":123,"
+					+ "\"from\":{\"id\":12345678,\"first_name\":\"John\",\"last_name\":\"Doe\","
+					+ "\"username\":\"johndoe\"},\"chat\":{\"id\":12345678,"
+					+ "\"first_name\":\"John\",\"last_name\":\"Doe\",\"username\":\"johndoe\"},"
 					+ "\"date\":1439275732,\"text\":\"\\" + message + "\"}}";
 		} else {
-			output += "{\"update_id\":567305119,\"message\":{\"message_id\":599,"
-					+ "\"from\":{\"id\":12345678,\"first_name\":\"Riccardo\",\"last_name\":\"Crippa\","
-					+ "\"username\":\"therickys93\"},\"chat\":{\"id\":12345678,"
-					+ "\"first_name\":\"Riccardo\",\"last_name\":\"Crippa\",\"username\":\"therickys93\"},"
+			output += "{\"update_id\":123456789,\"message\":{\"message_id\":123,"
+					+ "\"from\":{\"id\":12345678,\"first_name\":\"John\",\"last_name\":\"Doe\","
+					+ "\"username\":\"johndoe\"},\"chat\":{\"id\":12345678,"
+					+ "\"first_name\":\"John\",\"last_name\":\"Doe\",\"username\":\"johndoe\"},"
 					+ "\"date\":1439275732,\"text\":\"" + message + "\"}}";
 
 		}

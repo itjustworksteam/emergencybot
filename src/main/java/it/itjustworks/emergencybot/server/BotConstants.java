@@ -14,5 +14,9 @@ public class BotConstants {
 	public static final String LOCATION_BUTTON = "SEND YOUR LOCATION";
 	public static final String HELP_BUTTON = "HELP";
 	public static final String FEEDBACK_BUTTON = "FEEDBACK";
+	public static final String CONTACT_POLICE = "Contact Police";
+	public static final String CONTACT_FIRE = "Contact Fire";
+	public static final String CONTACT_MEDICAL = "Contact Medical";
+	public static final String CONTACT_NAME = "contact";
 	
 }

@@ -20,14 +20,13 @@ import com.pengrad.telegrambot.model.request.Keyboard;
 import com.pengrad.telegrambot.model.request.KeyboardButton;
 import com.pengrad.telegrambot.model.request.ReplyKeyboardMarkup;
 import com.pengrad.telegrambot.request.AnswerCallbackQuery;
+import com.pengrad.telegrambot.request.SendChatAction;
 import com.pengrad.telegrambot.request.SendContact;
 import com.pengrad.telegrambot.request.SendMessage;
 import com.pengrad.telegrambot.response.SendResponse;
 
-import it.itjustworks.emergencybot.JSONArray;
-import it.itjustworks.emergencybot.JSONObject;
-import it.itjustworks.emergencybot.JSONParser;
 import it.itjustworks.emergencybot.commands.BotResponse;
+import it.itjustworks.emergencybot.utilities.Emergency;
 import it.itjustworks.emergencybot.utilities.Utils;
 
 public class BotResource extends ServerResource {
@@ -49,8 +48,9 @@ public class BotResource extends ServerResource {
 			return null;
 		}
 		
-		final TelegramBot bot = TelegramBotAdapter.build(Config.INSTANCE.BOT_TOKEN);
 		getLogger().info(update.toString());
+		
+		final TelegramBot bot = TelegramBotAdapter.build(Config.INSTANCE.BOT_TOKEN);
 		Message message;
 		Chat chat;
 		if(update.message() != null){
@@ -80,40 +80,22 @@ public class BotResource extends ServerResource {
 		).oneTimeKeyboard(false);
 		if(Utils.isInteger(answer)) {
 			// send contact
-			response = bot.execute(new SendContact(chat.id(), answer, "contact").replyMarkup(keyboard));
+			response = bot.execute(new SendContact(chat.id(), answer, BotConstants.CONTACT_NAME).replyMarkup(keyboard));
 		} else if(Utils.isJSONValid(answer)) {
 			// send inline keyboard
-			JSONParser parser = new JSONParser();
-			String output;
-			String fire = "";
-			String police = "";
-			String medical = "";
-			try {
-				Object o = parser.parse(answer);
-				JSONObject jsonResponse = (JSONObject)o;
-				output = (String)jsonResponse.get("message");
-				fire = (String)jsonResponse.get("fire");
-				police = (String)jsonResponse.get("police");
-				medical = (String)jsonResponse.get("medical");
-			} catch (Exception e){
-				output = null;
-			}
-			if(message == null) {
-				response = bot.execute(new SendMessage(chat.id(), "Something unexpected happens"));
-			} else {
-				InlineKeyboardMarkup inlineKeyboard = new InlineKeyboardMarkup(
-				        new InlineKeyboardButton[]{
-				                new InlineKeyboardButton("Contact Police").callbackData(police),
-				        },
-				        new InlineKeyboardButton[]{
-				                new InlineKeyboardButton("Contact Fire").callbackData(fire),
-				        },
-				        new InlineKeyboardButton[]{
-				                new InlineKeyboardButton("Contact Medical").callbackData(medical)
-				        }
-				        );
-				response = bot.execute(new SendMessage(chat.id(), output).replyMarkup(inlineKeyboard));
-			}
+			Emergency emergency = Emergency.fromJSON(answer);
+			InlineKeyboardMarkup inlineKeyboard = new InlineKeyboardMarkup(
+			        new InlineKeyboardButton[]{
+			                new InlineKeyboardButton(BotConstants.CONTACT_POLICE).callbackData(emergency.getPoliceContact()),
+			        },
+			        new InlineKeyboardButton[]{
+			                new InlineKeyboardButton(BotConstants.CONTACT_FIRE).callbackData(emergency.getFireContact()),
+			        },
+			        new InlineKeyboardButton[]{
+			                new InlineKeyboardButton(BotConstants.CONTACT_MEDICAL).callbackData(emergency.getMedicalContact())
+			        }
+			        );
+			response = bot.execute(new SendMessage(chat.id(), emergency.getCountry()).replyMarkup(inlineKeyboard));
 		} else {
 			// send message
 			response = bot.execute(new SendMessage(chat.id(), answer).replyMarkup(keyboard));

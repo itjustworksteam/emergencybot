@@ -4,6 +4,8 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import com.pengrad.telegrambot.model.Message;
+
 import it.itjustworks.emergencybot.utilities.Utils;
 
 public class UtilsTest {
@@ -25,6 +27,38 @@ public class UtilsTest {
 		assertTrue(Utils.isJSONValid(validJsonString));
 		assertFalse(Utils.isJSONValid(invalidJsonString));
 
+	}
+	
+	@Test
+	public void testCreateTelegramMessageWithoutCommand() {
+		Message message = Utils.createMessageWithText("my message");
+		assertEquals(Integer.valueOf(123), message.messageId());
+		assertEquals(Integer.valueOf(1439275732), message.date());
+		assertEquals("my message", message.text());
+		assertEquals(Integer.valueOf(12345678), message.from().id());
+		assertEquals("John", message.from().firstName());
+		assertEquals("Doe", message.from().lastName());
+		assertEquals("johndoe", message.from().username());
+		assertEquals(Long.valueOf(12345678), message.chat().id());
+		assertEquals("John", message.chat().firstName());
+		assertEquals("Doe", message.chat().lastName());
+		assertEquals("johndoe", message.chat().username());
+	}
+	
+	@Test
+	public void testCreateTelegramMessageWithCommand() {
+		Message message = Utils.createMessageWithText("/command");
+		assertEquals(Integer.valueOf(123), message.messageId());
+		assertEquals(Integer.valueOf(1439275732), message.date());
+		assertEquals("/command", message.text());
+		assertEquals(Integer.valueOf(12345678), message.from().id());
+		assertEquals("John", message.from().firstName());
+		assertEquals("Doe", message.from().lastName());
+		assertEquals("johndoe", message.from().username());
+		assertEquals(Long.valueOf(12345678), message.chat().id());
+		assertEquals("John", message.chat().firstName());
+		assertEquals("Doe", message.chat().lastName());
+		assertEquals("johndoe", message.chat().username());
 	}
 	
 }

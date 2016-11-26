@@ -70,4 +70,24 @@ public class BotConstantsTest {
 	public void testFeedbackButtonText() {
 		assertEquals("FEEDBACK", BotConstants.FEEDBACK_BUTTON);
 	}
+	
+	@Test
+	public void testContactPolice() {
+		assertEquals("Contact Police", BotConstants.CONTACT_POLICE);
+	}
+	
+	@Test
+	public void testContactFire() {
+		assertEquals("Contact Fire", BotConstants.CONTACT_FIRE);
+	}
+	
+	@Test
+	public void testContactMedical() {
+		assertEquals("Contact Medical", BotConstants.CONTACT_MEDICAL);
+	}
+	
+	@Test
+	public void testContactName() {
+		assertEquals("contact", BotConstants.CONTACT_NAME);
+	}
 }

@@ -39,6 +39,20 @@ public class EmergencyTest {
 		assertEquals(emergencyToJSONResponse(), emergency.toJSON());
 	}
 	
+	@Test
+	public void testFromJson() {
+		Emergency emergency = Emergency.fromJSON(emergencyToJSONResponse());
+		assertEquals("/contact_115", emergency.getFireContact());
+		assertEquals("/contact_113", emergency.getPoliceContact());
+		assertEquals("/contact_118", emergency.getMedicalContact());
+		assertEquals("You are in Italy", emergency.getCountry());
+		assertNull(emergency.getCountryName());
+		assertNull(emergency.getFireNumber());
+		assertNull(emergency.getMedicalNumber());
+		assertNull(emergency.getPoliceNumber());
+		
+	}
+	
 	private String emergencyToJSONResponse() {
 		String output = "";
 		output += "{\"message\": \"You are in Italy\", "
