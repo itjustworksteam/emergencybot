@@ -20,5 +20,26 @@ public class EmojiTest {
 	public void testFireCar() {
 		assertEquals("🚒", Emoji.fireCar());
 	}
+	
+	// TODO: da fare da qui in poi	
+	@Test
+	public void testHello() {
+		assertEquals("👋", "");
+	}
+	
+	@Test
+	public void testSOS() {
+		assertEquals("🆘", "");
+	}
+	
+	@Test
+	public void testLocation() {
+		assertEquals("📍", "");
+	}
+	
+	@Test
+	public void testFlagOutput() {
+		assertEquals("🇮🇹", "");
+	}
 
 }
