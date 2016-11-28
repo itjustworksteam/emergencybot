@@ -15,6 +15,7 @@ public class Emergency {
 	private String police;
 	private String medical;
 	private String country;
+	private String code;
 	private String fireContact;
 	private String policeContact;
 	private String medicalContact;
@@ -34,6 +35,7 @@ public class Emergency {
 			this.medicalContact = "/contact_" + this.medical;
 			this.country = (String)jsonResponse.get(COUNTRY_NAME);
 			this.countryContact = "You are in " + this.country;
+			this.code = (String)jsonResponse.get("code");
 		} catch (Exception e){
 			this.country = null;
 		}
@@ -45,7 +47,7 @@ public class Emergency {
 		String output = "";
 		output += "Emergency: ";
 		output += "name = "
-				+ this.country
+				+ this.country + " " + Emoji.withCountry(this.code)
 				+ " ";
 		output += "fire = "
 				+ this.fire
@@ -80,7 +82,7 @@ public class Emergency {
 	public String prettyToString() {
 		String output = "";
 		output += "You are in "
-				+ this.country
+				+ this.country + " " + Emoji.withCountry(this.code)
 				+ ".\n\n"
 				+ "Fire: "
 				+ "/contact_" + this.fire
@@ -98,7 +100,7 @@ public class Emergency {
 	public String toJSON() {
 		String output = "";
 		output += "{\"message\": "
-				+ "\"You are in " + this.country +"\", "
+				+ "\"You are in " + this.country +" "+ Emoji.withCountry(this.code) +"\", "
 				+ "\"police\":\"/contact_"+this.police+"\", "
 				+ "\"fire\":\"/contact_"+this.fire+"\", "
 				+ "\"medical\":\"/contact_"+this.medical+"\"}";
@@ -152,6 +154,11 @@ public class Emergency {
 
 	public String getCountry() {
 		return this.countryContact;
+	}
+
+
+	public String getCode() {
+		return this.code;
 	}
 
 }
