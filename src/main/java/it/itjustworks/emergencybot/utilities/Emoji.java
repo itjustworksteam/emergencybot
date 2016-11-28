@@ -16,4 +16,20 @@ public class Emoji {
 		return EmojiParser.parseToUnicode(":fire_engine:");
 	}
 
+	public static String hello() {
+		return EmojiParser.parseToUnicode(":wave:");
+	}
+
+	public static String sos() {
+		return EmojiParser.parseToUnicode(":sos:");
+	}
+
+	public static String location() {
+		return EmojiParser.parseToUnicode(":round_pushpin:");
+	}
+
+	public static String withCountry(String country) {
+		return EmojiParser.parseToUnicode(":"+ country.toLowerCase() +":" );
+	}
+
 }
