@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import it.itjustworks.emergencybot.server.BotConstants;
+import it.itjustworks.emergencybot.utilities.Emoji;
 
 public class BotConstantsTest {
 
@@ -73,17 +74,17 @@ public class BotConstantsTest {
 	
 	@Test
 	public void testContactPolice() {
-		assertEquals("Contact Police", BotConstants.CONTACT_POLICE);
+		assertEquals("Contact Police " + Emoji.policeCar(), BotConstants.CONTACT_POLICE);
 	}
 	
 	@Test
 	public void testContactFire() {
-		assertEquals("Contact Fire", BotConstants.CONTACT_FIRE);
+		assertEquals("Contact Fire " + Emoji.fireCar(), BotConstants.CONTACT_FIRE);
 	}
 	
 	@Test
 	public void testContactMedical() {
-		assertEquals("Contact Medical", BotConstants.CONTACT_MEDICAL);
+		assertEquals("Contact Medical " + Emoji.ambulanceCar(), BotConstants.CONTACT_MEDICAL);
 	}
 	
 	@Test

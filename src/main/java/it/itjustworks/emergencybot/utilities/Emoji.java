@@ -32,4 +32,8 @@ public class Emoji {
 		return EmojiParser.parseToUnicode(":"+ country.toLowerCase() +":" );
 	}
 
+	public static String below() {
+		return EmojiParser.parseToUnicode(":point_down:");
+	}
+
 }

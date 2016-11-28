@@ -88,5 +88,10 @@ public class EmojiTest {
 		// va --> VATICAN CITY
 		assertEquals(":va:", Emoji.withCountry("va"));
 	}
+	
+	@Test
+	public void testBelow() {
+		assertEquals("👇", Emoji.below());
+	}
 
 }
