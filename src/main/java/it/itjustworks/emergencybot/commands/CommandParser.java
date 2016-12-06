@@ -28,7 +28,6 @@ public class CommandParser {
 	}
 
 	public String getArgument() {
-		// TODO Auto-generated method stub
 		return this.argument;
 	}
 

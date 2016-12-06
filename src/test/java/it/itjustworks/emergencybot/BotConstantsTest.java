@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import it.itjustworks.emergencybot.server.BotConstants;
+import it.itjustworks.emergencybot.utilities.Emoji;
 
 public class BotConstantsTest {
 
@@ -56,4 +57,38 @@ public class BotConstantsTest {
 		assertEquals("The bot is in maintainance!\nPlease retry later.\nWe apologize for the inconvenience.\n", BotConstants.MAINTAINANCE_MESSAGE);
 	}
 	
+	@Test
+	public void testSendYourLocationButtonText() {
+		assertEquals("SEND YOUR LOCATION", BotConstants.LOCATION_BUTTON);
+	}
+	
+	@Test
+	public void testHelpButtonText() {
+		assertEquals("HELP", BotConstants.HELP_BUTTON);
+	}
+	
+	@Test
+	public void testFeedbackButtonText() {
+		assertEquals("FEEDBACK", BotConstants.FEEDBACK_BUTTON);
+	}
+	
+	@Test
+	public void testContactPolice() {
+		assertEquals("Contact Police " + Emoji.policeCar(), BotConstants.CONTACT_POLICE);
+	}
+	
+	@Test
+	public void testContactFire() {
+		assertEquals("Contact Fire " + Emoji.fireCar(), BotConstants.CONTACT_FIRE);
+	}
+	
+	@Test
+	public void testContactMedical() {
+		assertEquals("Contact Medical " + Emoji.ambulanceCar(), BotConstants.CONTACT_MEDICAL);
+	}
+	
+	@Test
+	public void testContactName() {
+		assertEquals("contact", BotConstants.CONTACT_NAME);
+	}
 }
