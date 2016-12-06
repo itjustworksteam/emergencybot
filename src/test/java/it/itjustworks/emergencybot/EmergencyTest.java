@@ -19,6 +19,7 @@ public class EmergencyTest {
 		assertEquals("113", emergency.getPoliceNumber());
 		assertEquals("118", emergency.getMedicalNumber());
 		assertEquals("Italy", emergency.getCountryName());
+		assertEquals("IT", emergency.getCode());
 	}
 	
 	@Test
@@ -33,9 +34,36 @@ public class EmergencyTest {
 		assertEquals(beautifulToString(), emergency.prettyToString());
 	}
 	
+	@Test
+	public void testToJSON() {
+		Emergency emergency = new Emergency(emergencyResponse());
+		assertEquals(emergencyToJSONResponse(), emergency.toJSON());
+	}
+	
+	@Test
+	public void testFromJson() {
+		Emergency emergency = Emergency.fromJSON(emergencyToJSONResponse());
+		assertEquals("/contact_115", emergency.getFireContact());
+		assertEquals("/contact_113", emergency.getPoliceContact());
+		assertEquals("/contact_118", emergency.getMedicalContact());
+		assertEquals("You are in Italy 🇮🇹", emergency.getCountry());
+		assertNull(emergency.getCountryName());
+		assertNull(emergency.getFireNumber());
+		assertNull(emergency.getMedicalNumber());
+		assertNull(emergency.getPoliceNumber());
+		
+	}
+	
+	private String emergencyToJSONResponse() {
+		String output = "";
+		output += "{\"message\": \"You are in Italy 🇮🇹\", "
+				+ "\"police\":\"/contact_113\", \"fire\":\"/contact_115\", \"medical\":\"/contact_118\"}";
+		return output;
+	}
+	
 	private String beautifulToString() {
 		String output = "";
-		output += "You are in Italy.\n\n"
+		output += "You are in Italy 🇮🇹.\n\n"
 				+ "Fire: /contact_115.\n\n"
 				+ "Police: /contact_113.\n\n"
 				+ "Medical: /contact_118.\n";
@@ -45,7 +73,7 @@ public class EmergencyTest {
 	private String emergencyToString() {
 		String output = "";
 		output += "Emergency: ";
-		output += "name = Italy ";
+		output += "name = Italy " + "🇮🇹 ";
 		output += "fire = 115 ";
 		output += "police = 113 ";
 		output += "medical = 118 ";
