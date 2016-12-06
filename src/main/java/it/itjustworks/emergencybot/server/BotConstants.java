@@ -1,5 +1,7 @@
 package it.itjustworks.emergencybot.server;
 
+import it.itjustworks.emergencybot.utilities.Emoji;
+
 public class BotConstants {
 
 	public static final String CONNECTION_FAILED = "Error 1: Connection Failed.\n"+BotConstants.ACTION_ERROR;
@@ -14,9 +16,9 @@ public class BotConstants {
 	public static final String LOCATION_BUTTON = "SEND YOUR LOCATION";
 	public static final String HELP_BUTTON = "HELP";
 	public static final String FEEDBACK_BUTTON = "FEEDBACK";
-	public static final String CONTACT_POLICE = "Contact Police";
-	public static final String CONTACT_FIRE = "Contact Fire";
-	public static final String CONTACT_MEDICAL = "Contact Medical";
+	public static final String CONTACT_POLICE = "Contact Police " + Emoji.policeCar();
+	public static final String CONTACT_FIRE = "Contact Fire " + Emoji.fireCar();
+	public static final String CONTACT_MEDICAL = "Contact Medical " + Emoji.ambulanceCar();
 	public static final String CONTACT_NAME = "contact";
 	
 }

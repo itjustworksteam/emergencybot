@@ -9,6 +9,7 @@ import com.pengrad.telegrambot.model.Message;
 import com.pengrad.telegrambot.model.Update;
 
 import it.itjustworks.emergencybot.commands.BotResponse;
+import it.itjustworks.emergencybot.utilities.Emoji;
 
 public class BotCommandTest {
 
@@ -131,8 +132,9 @@ public class BotCommandTest {
 	
 	private String startResponse() {
 		String output = "";
-		output += "Welcome! With this bot you can retrieve the emergency phone numbers of the country "
-				+ "only by sending your location.\nFor more please send /help\n";
+		output += "Welcome! " + Emoji.hello() + " With this bot you can retrieve the "+ Emoji.sos() +" phone numbers of the country "
+				+ "only by sending your location " + Emoji.location() + ".\nFor more please send /help or simply press the "
+						+ "\"SEND YOUR LOCATION\" button " + Emoji.below() + "\n";
 		return output;
 	}
 	
