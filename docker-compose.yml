@@ -1,0 +1,22 @@
+version: '2'
+
+services: 
+    app:
+        build: . 
+        environment: 
+            - TELEGRAM_BOT_TOKEN=<your_token_here>
+            - TELEGRAM_SERVER_TOKEN=123
+            - PORT=80
+        networks: 
+            - backbone
+
+    proxy:
+        image: therickys93/proxy
+        ports: 
+            - "80:80"
+        networks: 
+            - backbone
+
+networks: 
+    backbone:
+        driver: bridge
