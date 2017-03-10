@@ -1,5 +1,7 @@
 package it.itjustworks.emergencybot.utilities;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 import com.pengrad.telegrambot.BotUtils;
 import com.pengrad.telegrambot.model.Message;
 import com.pengrad.telegrambot.model.Update;
@@ -17,10 +19,10 @@ public class Utils {
 	
 	public static boolean isJSONValid(String jsonInString) {
 		try {
-			com.google.gson.Gson gson = new com.google.gson.Gson();
+			Gson gson = new Gson();
 			gson.fromJson(jsonInString, Emergency.class);
 	        return true;
-	    } catch(com.google.gson.JsonSyntaxException ex) { 
+	    } catch(JsonSyntaxException ex) { 
 	        return false;
 	    }
 	}	

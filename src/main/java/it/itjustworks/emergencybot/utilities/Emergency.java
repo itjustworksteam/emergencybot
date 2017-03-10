@@ -1,10 +1,11 @@
 package it.itjustworks.emergencybot.utilities;
 
-import it.itjustworks.emergencybot.JSONObject;
-import it.itjustworks.emergencybot.JSONParser;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 public class Emergency {
 
+	private static final String CODE = "code";
 	private static final String MESSAGE = "message";
 	private static final String COUNTRY_NAME = "name";
 	private static final String MEDICAL = "medical";
@@ -23,19 +24,18 @@ public class Emergency {
 	
 	public Emergency(String json) {
 		this.json = json;
-		JSONParser parser = new JSONParser();
+		JsonParser parser = new JsonParser();
 		try {
-			Object o = parser.parse(this.json);
-			JSONObject jsonResponse = (JSONObject)o;
-			this.fire = (String)jsonResponse.get(FIRE);
-			this.fireContact = "/contact_" + this.fire;
-			this.police = (String)jsonResponse.get(POLICE);
-			this.policeContact = "/contact_" + this.police;
-			this.medical = (String)jsonResponse.get(MEDICAL);
-			this.medicalContact = "/contact_" + this.medical;
-			this.country = (String)jsonResponse.get(COUNTRY_NAME);
+			JsonObject object = parser.parse(this.json).getAsJsonObject();
+			this.country = object.get(COUNTRY_NAME).getAsString();
 			this.countryContact = "You are in " + this.country;
-			this.code = (String)jsonResponse.get("code");
+			this.fire = object.get(FIRE).getAsString();
+			this.fireContact = "/contact_" + this.fire;
+			this.police = object.get(POLICE).getAsString();
+			this.policeContact = "/contact_" + this.police;
+			this.medical = object.get(MEDICAL).getAsString();
+			this.medicalContact = "/contact_" + this.medical;
+			this.code = object.get(CODE).getAsString();			
 		} catch (Exception e){
 			this.country = null;
 		}
@@ -109,18 +109,17 @@ public class Emergency {
 
 
 	public static Emergency fromJSON(String emergencyToJSONResponse) {
-		JSONParser parser = new JSONParser();
+		JsonParser parser = new JsonParser();
 		String fire;
 		String medical;
 		String police;
 		String output;
 		try {
-			Object o = parser.parse(emergencyToJSONResponse);
-			JSONObject jsonResponse = (JSONObject)o;
-			output = (String)jsonResponse.get(MESSAGE);
-			fire = (String)jsonResponse.get(FIRE);
-			police = (String)jsonResponse.get(POLICE);
-			medical = (String)jsonResponse.get(MEDICAL);
+			JsonObject object = parser.parse(emergencyToJSONResponse).getAsJsonObject();
+			output = object.get(MESSAGE).getAsString();
+			fire = object.get(FIRE).getAsString();
+			police = object.get(POLICE).getAsString();
+			medical = object.get(MEDICAL).getAsString();
 			return new Emergency(output, fire, police, medical);
 		} catch (Exception e){
 			output = null;
