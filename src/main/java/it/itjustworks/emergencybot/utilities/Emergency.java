@@ -15,6 +15,7 @@ public class Emergency {
 	private String fire;
 	private String police;
 	private String medical;
+	private String city;
 	private String country;
 	private String code;
 	private String fireContact;
@@ -35,7 +36,8 @@ public class Emergency {
 			this.policeContact = "/contact_" + this.police;
 			this.medical = object.get(MEDICAL).getAsString();
 			this.medicalContact = "/contact_" + this.medical;
-			this.code = object.get(CODE).getAsString();			
+			this.code = object.get(CODE).getAsString();	
+			this.city = object.get("closestcity").getAsString();
 		} catch (Exception e){
 			this.country = null;
 		}
@@ -48,7 +50,8 @@ public class Emergency {
 		output += "Emergency: ";
 		output += "name = "
 				+ this.country + " " + Emoji.withCountry(this.code)
-				+ " ";
+				+ " "
+				+ "city = " + this.city + " ";
 		output += "fire = "
 				+ this.fire
 				+ " ";
@@ -83,7 +86,7 @@ public class Emergency {
 		String output = "";
 		output += "You are in "
 				+ this.country + " " + Emoji.withCountry(this.code)
-				+ ".\n\n"
+				+ " and the closest city is " + this.city + ".\n\n"
 				+ "Fire: "
 				+ "/contact_" + this.fire
 				+ ".\n\n"
@@ -100,7 +103,7 @@ public class Emergency {
 	public String toJSON() {
 		String output = "";
 		output += "{\"message\": "
-				+ "\"You are in " + this.country +" "+ Emoji.withCountry(this.code) +"\", "
+				+ "\"You are in " + this.country +" "+ Emoji.withCountry(this.code) +" and the closest city is "+this.city+"\", "
 				+ "\"police\":\"/contact_"+this.police+"\", "
 				+ "\"fire\":\"/contact_"+this.fire+"\", "
 				+ "\"medical\":\"/contact_"+this.medical+"\"}";
@@ -114,13 +117,15 @@ public class Emergency {
 		String medical;
 		String police;
 		String output;
+		String city = "";
 		try {
 			JsonObject object = parser.parse(emergencyToJSONResponse).getAsJsonObject();
 			output = object.get(MESSAGE).getAsString();
 			fire = object.get(FIRE).getAsString();
 			police = object.get(POLICE).getAsString();
 			medical = object.get(MEDICAL).getAsString();
-			return new Emergency(output, fire, police, medical);
+			//city = object.get("closestcity").getAsString();
+			return new Emergency(output, fire, police, medical, city);
 		} catch (Exception e){
 			output = null;
 		}
@@ -128,11 +133,12 @@ public class Emergency {
 	}
 	
 
-	private Emergency(String country, String fire, String police, String medical) {
+	private Emergency(String country, String fire, String police, String medical, String city) {
 		this.countryContact = country;
 		this.medicalContact = medical;
 		this.policeContact = police;
 		this.fireContact = fire;
+		this.city = city;
 	}
 
 
@@ -158,6 +164,11 @@ public class Emergency {
 
 	public String getCode() {
 		return this.code;
+	}
+
+
+	public String getCity() {
+		return this.city;
 	}
 
 }

@@ -20,6 +20,7 @@ public class EmergencyTest {
 		assertEquals("118", emergency.getMedicalNumber());
 		assertEquals("Italy", emergency.getCountryName());
 		assertEquals("IT", emergency.getCode());
+		assertEquals("Voghera", emergency.getCity());
 	}
 	
 	@Test
@@ -46,7 +47,7 @@ public class EmergencyTest {
 		assertEquals("/contact_115", emergency.getFireContact());
 		assertEquals("/contact_113", emergency.getPoliceContact());
 		assertEquals("/contact_118", emergency.getMedicalContact());
-		assertEquals("You are in Italy 🇮🇹", emergency.getCountry());
+		assertEquals("You are in Italy 🇮🇹 and the closest city is Voghera", emergency.getCountry());
 		assertNull(emergency.getCountryName());
 		assertNull(emergency.getFireNumber());
 		assertNull(emergency.getMedicalNumber());
@@ -56,14 +57,14 @@ public class EmergencyTest {
 	
 	private String emergencyToJSONResponse() {
 		String output = "";
-		output += "{\"message\": \"You are in Italy 🇮🇹\", "
+		output += "{\"message\": \"You are in Italy 🇮🇹 and the closest city is Voghera\", "
 				+ "\"police\":\"/contact_113\", \"fire\":\"/contact_115\", \"medical\":\"/contact_118\"}";
 		return output;
 	}
 	
 	private String beautifulToString() {
 		String output = "";
-		output += "You are in Italy 🇮🇹.\n\n"
+		output += "You are in Italy 🇮🇹 and the closest city is Voghera.\n\n"
 				+ "Fire: /contact_115.\n\n"
 				+ "Police: /contact_113.\n\n"
 				+ "Medical: /contact_118.\n";
@@ -73,7 +74,8 @@ public class EmergencyTest {
 	private String emergencyToString() {
 		String output = "";
 		output += "Emergency: ";
-		output += "name = Italy " + "🇮🇹 ";
+		output += "name = Italy " + "🇮🇹 "
+				+ "city = Voghera ";
 		output += "fire = 115 ";
 		output += "police = 113 ";
 		output += "medical = 118 ";
@@ -84,7 +86,7 @@ public class EmergencyTest {
 	private String emergencyResponse() {
 		String output = "";
 		output += "{\"code\":\"IT\",\"fire\":\"115\","
-				+ "\"police\":\"113\",\"name\":\"Italy\",\"medical\":\"118\"}";
+				+ "\"police\":\"113\",\"name\":\"Italy\",\"medical\":\"118\", \"closestcity\":\"Voghera\"}";
 		return output;
 	}
 }
