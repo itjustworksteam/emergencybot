@@ -6,6 +6,7 @@
 
 * the official bot is [here](https://telegram.me/emergencynumbersbot)
 * Contribution is really appreciated.
+* This bot use the emergencyserver as backend. You can find the repo [here](https://github.com/itjustworksteam/emergencyserver)
 
 ### How do I get set up? ###
 
