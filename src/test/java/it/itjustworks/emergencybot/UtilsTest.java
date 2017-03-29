@@ -1,15 +1,23 @@
 package it.itjustworks.emergencybot;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.contrib.java.lang.system.EnvironmentVariables;
 
 import com.pengrad.telegrambot.model.Message;
 
+import it.itjustworks.emergencybot.utilities.ServiceRequest;
 import it.itjustworks.emergencybot.utilities.Utils;
 
 public class UtilsTest {
 
+	@Rule
+	public EnvironmentVariables variable = new EnvironmentVariables();
+	
 	@Test
 	public void testIsInteger() {
 		assertTrue(Utils.isInteger("123"));
@@ -59,6 +67,14 @@ public class UtilsTest {
 		assertEquals("John", message.chat().firstName());
 		assertEquals("Doe", message.chat().lastName());
 		assertEquals("johndoe", message.chat().username());
+	}
+	
+	@Test
+	public void testEmergencyServerUrl() {
+		// EMERGENCY_URL
+		assertEquals("https://emergency-server.herokuapp.com/api/v2/numbers/", ServiceRequest.emergencyServerUrl());
+		variable.set("EMERGENCY_URL", "http://emergencyserver.com");
+		assertEquals("http://emergencyserver.com", ServiceRequest.emergencyServerUrl());
 	}
 	
 }
