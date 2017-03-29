@@ -11,12 +11,17 @@ import com.pengrad.telegrambot.model.Location;
 import it.itjustworks.emergencybot.server.BotConstants;
 
 public class ServiceRequest {
-	
-	private static String EMERGENCY_SERVER_API_ENDPOINT = "https://emergency-server.herokuapp.com/api/v2/numbers/";
+		
+	public static String emergencyServerUrl(){
+		if(System.getenv("EMERGENCY_URL") != null) {
+			return System.getenv("EMERGENCY_URL");
+		}
+		return "https://emergency-server.herokuapp.com/api/v2/numbers/";
+	}
 	
 	// GET /api/v2/numbers/:latitude/:longitude
 	public String executeWithLocation(Location location) throws Exception{
-		Emergency emergency = getEmergency(EMERGENCY_SERVER_API_ENDPOINT + location.latitude().toString() + "/" + location.longitude().toString());
+		Emergency emergency = getEmergency(emergencyServerUrl() + location.latitude().toString() + "/" + location.longitude().toString());
 		if(emergency == null) {
 			return BotConstants.GETTING_EMERGENCY_ERROR;
 		}

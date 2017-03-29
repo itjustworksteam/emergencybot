@@ -13,7 +13,7 @@
 * You have to install java oracle jdk 8 to continue
 * clone this repository
 * compile it with: ``./gradlew clean stage``
-* remember to set up this environment variables: ``TELEGRAM_SERVER_TOKEN``, ``TELEGRAM_BOT_TOKEN``, ``PORT``
+* remember to set up this environment variables: ``TELEGRAM_SERVER_TOKEN``, ``TELEGRAM_BOT_TOKEN``, ``PORT`` and ``EMERGENCY_URL``
 * run it with: ``java -cp build/libs/emergencybot.jar it.itjustworks.emergencybot.server.Server``
 * run tests with: ``./gradlew clean check``
 
