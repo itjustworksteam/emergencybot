@@ -72,7 +72,7 @@ public class UtilsTest {
 	@Test
 	public void testEmergencyServerUrl() {
 		// EMERGENCY_URL
-		assertEquals("https://emergency-server.herokuapp.com/api/v2/numbers/", ServiceRequest.emergencyServerUrl());
+		assertEquals("https://emergency-server.herokuapp.com", ServiceRequest.emergencyServerUrl());
 		variable.set("EMERGENCY_URL", "http://emergencyserver.com");
 		assertEquals("http://emergencyserver.com", ServiceRequest.emergencyServerUrl());
 	}

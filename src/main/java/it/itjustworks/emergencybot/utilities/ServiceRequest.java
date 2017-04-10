@@ -13,14 +13,14 @@ public class ServiceRequest {
 		if(System.getenv("EMERGENCY_URL") != null) {
 			return System.getenv("EMERGENCY_URL");
 		}
-		return "https://emergency-server.herokuapp.com/api/v2/numbers/";
+		return "https://emergency-server.herokuapp.com";
 	}
 	
 	public String executeWithLocation(Location location) throws IOException{
 		String latitude = location.latitude().toString();
 		String longitude = location.longitude().toString();
 		Country country = Country.parse(
-				new it.itjustworks.emergency.Emergency().sendRequest(
+				new it.itjustworks.emergency.Emergency().withBackEndUrl(emergencyServerUrl()).sendRequest(
 						new Numbers().withLatitudeAndLongitude(latitude, longitude)
 						)
 				);

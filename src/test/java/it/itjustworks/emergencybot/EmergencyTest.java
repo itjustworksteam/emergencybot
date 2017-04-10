@@ -6,8 +6,7 @@ import org.junit.Test;
 import it.itjustworks.emergencybot.utilities.Emergency;
 
 public class EmergencyTest {
-	
-			
+		
 	@Test
 	public void testFromJson() {
 		Emergency emergency = Emergency.fromJSON(emergencyToJSONResponse());
@@ -19,7 +18,6 @@ public class EmergencyTest {
 		assertNull(emergency.getFireNumber());
 		assertNull(emergency.getMedicalNumber());
 		assertNull(emergency.getPoliceNumber());
-		
 	}
 	
 	private String emergencyToJSONResponse() {
