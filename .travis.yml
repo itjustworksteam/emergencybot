@@ -5,8 +5,8 @@ services:
   - docker
 script:
   - ./gradlew clean check stage
-after_success:
   - docker build -t therickys93/emergencybot .
+after_success:
   - if [ "$TRAVIS_BRANCH" == "master" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
     docker login -e="$DOCKER_EMAIL" -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
     docker push therickys93/emergencybot;
