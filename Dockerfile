@@ -1,4 +1,4 @@
-FROM therickys93/ubuntu14java
+FROM therickys93/alpinejava
 ADD . /emergencybot
 WORKDIR /emergencybot
 RUN ./gradlew clean check stage
