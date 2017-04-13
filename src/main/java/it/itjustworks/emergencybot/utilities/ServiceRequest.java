@@ -1,14 +1,11 @@
 package it.itjustworks.emergencybot.utilities;
 
-import org.restlet.Client;
-import org.restlet.Context;
-import org.restlet.data.Protocol;
-import org.restlet.representation.Representation;
-import org.restlet.resource.ClientResource;
+import java.io.IOException;
 
 import com.pengrad.telegrambot.model.Location;
 
-import it.itjustworks.emergencybot.server.BotConstants;
+import it.itjustworks.emergency.Country;
+import it.itjustworks.emergency.Numbers;
 
 public class ServiceRequest {
 		
@@ -16,26 +13,19 @@ public class ServiceRequest {
 		if(System.getenv("EMERGENCY_URL") != null) {
 			return System.getenv("EMERGENCY_URL");
 		}
-		return "https://emergency-server.herokuapp.com/api/v2/numbers/";
+		return "https://emergency-server.herokuapp.com";
 	}
 	
-	// GET /api/v2/numbers/:latitude/:longitude
-	public String executeWithLocation(Location location) throws Exception{
-		Emergency emergency = getEmergency(emergencyServerUrl() + location.latitude().toString() + "/" + location.longitude().toString());
-		if(emergency == null) {
-			return BotConstants.GETTING_EMERGENCY_ERROR;
-		}
+	public String executeWithLocation(Location location) throws IOException{
+		String latitude = location.latitude().toString();
+		String longitude = location.longitude().toString();
+		Country country = Country.parse(
+				new it.itjustworks.emergency.Emergency().withBackEndUrl(emergencyServerUrl()).sendRequest(
+						new Numbers().withLatitudeAndLongitude(latitude, longitude)
+						)
+				);
+		Emergency emergency = new Emergency(country.name(), country.code(), country.city(), country.police(), country.fire(), country.medical());
 		return emergency.toJSON();
-	}
-
-	private Emergency getEmergency(String url) throws Exception {
-		Client client = new Client(new Context(), Protocol.HTTPS);
-		ClientResource clientResource = new ClientResource(url);
-		clientResource.setNext(client);
-		Representation data = clientResource.get();
-		Emergency emergency = new Emergency(data.getText());
-		client.stop();
-		return (emergency.getCountryName() == null) ? null : emergency;
 	}
 	
 }

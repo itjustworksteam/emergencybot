@@ -44,6 +44,7 @@ private HashMap<String, Command> commands = new HashMap<String, Command>();
 			try {
 				return new ServiceRequest().executeWithLocation(message.location());
 			} catch (Exception e) {
+				e.printStackTrace();
 				return BotConstants.CONNECTION_FAILED;
 			}
 		} else {
