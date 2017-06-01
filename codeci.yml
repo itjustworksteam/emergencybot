@@ -1,4 +1,4 @@
-os: ubuntu14
+os: alpine
 language: java
 script:
   - ./gradlew clean check stage
