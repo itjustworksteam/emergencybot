@@ -3,7 +3,7 @@ package it.itjustworks.emergencybot.commands;
 public class HelpCommand implements Command {
 
 	@Override
-	public String execute(String message) {
+	public String execute(String message, String language) {
 		String output = "";
 		output += "This bot needs only your location to work.\n"
 				+ "Click the 'clip' and then click on 'Location' to send your current location.\n"

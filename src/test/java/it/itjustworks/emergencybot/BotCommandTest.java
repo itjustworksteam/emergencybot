@@ -157,13 +157,13 @@ public class BotCommandTest {
 		if(message.contains("/")) {
 			output += "{\"update_id\":567305119,\"message\":{\"message_id\":599,"
 					+ "\"from\":{\"id\":12345678,\"first_name\":\"Riccardo\",\"last_name\":\"Crippa\","
-					+ "\"username\":\"therickys93\"},\"chat\":{\"id\":12345678,"
+					+ "\"username\":\"therickys93\",\"language_code\":\"en-US\"},\"chat\":{\"id\":12345678,"
 					+ "\"first_name\":\"Riccardo\",\"last_name\":\"Crippa\",\"username\":\"therickys93\"},"
 					+ "\"date\":1439275732,\"text\":\"\\" + message + "\"}}";
 		} else {
 			output += "{\"update_id\":567305119,\"message\":{\"message_id\":599,"
 					+ "\"from\":{\"id\":12345678,\"first_name\":\"Riccardo\",\"last_name\":\"Crippa\","
-					+ "\"username\":\"therickys93\"},\"chat\":{\"id\":12345678,"
+					+ "\"username\":\"therickys93\",\"language_code\":\"en-US\"},\"chat\":{\"id\":12345678,"
 					+ "\"first_name\":\"Riccardo\",\"last_name\":\"Crippa\",\"username\":\"therickys93\"},"
 					+ "\"date\":1439275732,\"text\":\"" + message + "\"}}";
 
