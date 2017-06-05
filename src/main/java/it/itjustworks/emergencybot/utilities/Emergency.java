@@ -19,6 +19,7 @@ public class Emergency {
 	private String policeContact;
 	private String medicalContact;
 	private String countryContact;	
+	private String prettyToString;
 
 	@Override
 	public String toString() {
@@ -79,7 +80,7 @@ public class Emergency {
 	public String toJSON() {
 		String output = "";
 		output += "{\"message\": "
-				+ "\"You are in " + this.country +" "+ Emoji.withCountry(this.code) +" and the closest city is "+this.city+"\", "
+				+ "\"" + this.prettyToString + "\""
 				+ "\"police\":\"/contact_"+this.police+"\", "
 				+ "\"fire\":\"/contact_"+this.fire+"\", "
 				+ "\"medical\":\"/contact_"+this.medical+"\"}";
@@ -105,6 +106,13 @@ public class Emergency {
 			output = null;
 		}
 		return null;
+	}
+	
+	public Emergency(String prettyToString, String police, String fire, String medical){
+		this.prettyToString = prettyToString;
+		this.police = police;
+		this.fire = fire;
+		this.medical = medical;
 	}
 	
 	public Emergency(String country, String code, String city, String police, String fire, String medical){

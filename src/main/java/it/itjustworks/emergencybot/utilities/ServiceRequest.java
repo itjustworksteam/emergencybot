@@ -24,7 +24,7 @@ public class ServiceRequest {
 						new Numbers().withLatitudeAndLongitude(latitude, longitude)
 						), it.itjustworks.emergency.Utils.botLanguage(message.from().languageCode())
 				);
-		Emergency emergency = new Emergency(country.name(), country.code(), country.city(), country.police(), country.fire(), country.medical());
+		Emergency emergency = new Emergency(country.prettyToString(), country.police(), country.fire(), country.medical());
 		return emergency.toJSON();
 	}
 	
