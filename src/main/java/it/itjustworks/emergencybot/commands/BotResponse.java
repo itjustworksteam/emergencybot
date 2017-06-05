@@ -42,7 +42,7 @@ private HashMap<String, Command> commands = new HashMap<String, Command>();
 	public String reply(Message message) {
 		if(message.location() != null) {
 			try {
-				return new ServiceRequest().executeWithLocation(message.location());
+				return new ServiceRequest().executeWithMessage(message);
 			} catch (Exception e) {
 				e.printStackTrace();
 				return BotConstants.CONNECTION_FAILED;
