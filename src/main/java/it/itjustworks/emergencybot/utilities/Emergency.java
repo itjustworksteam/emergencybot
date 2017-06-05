@@ -80,7 +80,7 @@ public class Emergency {
 	public String toJSON() {
 		String output = "";
 		output += "{\"message\": "
-				+ "\"" + this.prettyToString + "\""
+				+ "\"" + this.prettyToString + "\", "
 				+ "\"police\":\"/contact_"+this.police+"\", "
 				+ "\"fire\":\"/contact_"+this.fire+"\", "
 				+ "\"medical\":\"/contact_"+this.medical+"\"}";
