@@ -1,12 +1,12 @@
 package it.itjustworks.emergencybot.commands;
 
+import it.itjustworks.emergency.Utils;
+
 public class CreditsCommand implements Command {
 
 	@Override
 	public String execute(String message, String language) {
-		String output = "";
-		output += "Developed by @therickys93, co-founder of 'It Just Works'. More info at www.itjustworks.it.";
-		return output;
+		return Utils.botLanguage(language).credits();
 	}
 
 }
