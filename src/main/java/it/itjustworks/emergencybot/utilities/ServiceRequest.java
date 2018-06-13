@@ -29,6 +29,7 @@ public class ServiceRequest {
 						), it.itjustworks.emergency.Utils.botLanguage(message.from().languageCode())
 				);
 		Emergency emergency = new Emergency(country.prettyToString(), country.police(), country.fire(), country.medical());
+		emergency.addCity(city.getAsciiname());
 		return emergency.toJSON();
 	}
 	
