@@ -5,8 +5,6 @@ import org.springframework.batch.item.UnexpectedInputException;
 
 import com.pengrad.telegrambot.model.Message;
 
-import it.itjustworks.emergency.Country;
-import it.itjustworks.emergency.Numbers;
 import it.itjustworks.emergencybot.Location.City;
 import it.itjustworks.emergencybot.Location.CityServiceImpl;
 
@@ -23,12 +21,17 @@ public class ServiceRequest {
 		String latitude = message.location().latitude().toString();
 		String longitude = message.location().longitude().toString();
 		City city = new CityServiceImpl().findByLatLong(Double.parseDouble(latitude), Double.parseDouble(longitude));
+		/*
 		Country country = Country.parse(
 				new it.itjustworks.emergency.Emergency().withBackEndUrl(emergencyServerUrl()).sendRequest(
 						new Numbers().withCountry(city.getCountrycode())
 						), it.itjustworks.emergency.Utils.botLanguage(message.from().languageCode())
 				);
-		Emergency emergency = new Emergency(country.prettyToString(), country.police(), country.fire(), country.medical());
+		*/
+		Numbers numbers = new Numbers();
+		Country country = numbers.getCountry(city.getCountrycode().toUpperCase());
+		country.setCity(city.getAsciiname());
+		Emergency emergency = new Emergency(country.prettyToString(), country.getPolice(), country.getFire(), country.getMedical());
 		emergency.addCity(city.getAsciiname());
 		return emergency.toJSON();
 	}
