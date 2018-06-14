@@ -36,7 +36,7 @@ jacocoTestReport {
     reports {
         xml.enabled true
         csv.enabled false
-        html.destination "${buildDir}/reports/jacoco"
+        html.destination file("${buildDir}/reports/jacoco")
     }
 }
 
@@ -53,6 +53,7 @@ dependencies {
     compile 'com.github.pengrad:java-telegram-bot-api:3.1.0'
     compile 'com.github.itjustworksteam:javaemergencyapi:0.1.1'
     compile 'com.vdurmont:emoji-java:3.1.3'
+    compile group: 'org.springframework.batch', name: 'spring-batch-core', version: '3.0.8.RELEASE'
     testCompile 'junit:junit:4.12'
     testCompile 'com.github.stefanbirkner:system-rules:1.16.0'
     testCompile 'org.mockito:mockito-core:2.7.14'

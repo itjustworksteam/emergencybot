@@ -80,13 +80,16 @@ public class Emergency {
 	public String toJSON() {
 		String output = "";
 		output += "{\"message\": "
-				+ "\"" + this.prettyToString + "\", "
+				+ "\"" + this.prettyToString + " and the closest city is " + this.city  +  "\", "
 				+ "\"police\":\"/contact_"+this.police+"\", "
 				+ "\"fire\":\"/contact_"+this.fire+"\", "
 				+ "\"medical\":\"/contact_"+this.medical+"\"}";
 		return output;
 	}
 
+	public void addCity(String city){
+		this.city = city;
+	}
 
 	public static Emergency fromJSON(String emergencyToJSONResponse) {
 		JsonParser parser = new JsonParser();
